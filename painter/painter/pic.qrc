@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>host.png</file>
+        <file>router.png</file>
+    </qresource>
+</RCC>
