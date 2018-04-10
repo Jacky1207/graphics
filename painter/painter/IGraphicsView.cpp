@@ -35,7 +35,7 @@ void IGraphicsView::zoomOut()
 void IGraphicsView::zoom(const float scaleFactor)
 {
     qreal factor = transform().scale(scaleFactor, scaleFactor).mapRect(QRectF(0, 0, 1, 1)).width();
-    if (factor < 0.07 || factor > 100)
+    if (factor < 0.1 || factor > 50)
         return;
 
     scale(scaleFactor, scaleFactor);

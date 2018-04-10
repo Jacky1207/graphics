@@ -26,7 +26,6 @@ void IGraphicsScene::initNode()
         INode *node = new INode(i, _root_node);
         node->setChildNodePoint(node->getChildNodePoint(i));
 #if 1
-        if(i == 5){
             for(int j=0;j<2;j++)
             {
                 INode *nodeChild = new INode(j, node);
@@ -47,7 +46,6 @@ void IGraphicsScene::initNode()
                 }
                 node->addChildNode(nodeChild);
             }
-        }
 #endif
         _root_node->addChildNode(node);
     }
@@ -88,13 +86,14 @@ void IGraphicsScene::initNode()
         _root_node->addChild(node);
     }
 
-*/    getChildrenNode(_root_node);
+*/
+    getChildrenNode(_root_node);
 
 }
 
 INodeInformation* IGraphicsScene::getChildrenNode(INodeInformation *root)
 {
-    IGraphicsPixmapItem *pixmapItem = new IGraphicsPixmapItem();
+    IGraphicsPixmapItem *pixmapItem = new IGraphicsPixmapItem(this);
     if(root->getParentNode() == NULL)
     {
         pixmapItem->setPixmapPath(":/host.png");
@@ -126,15 +125,17 @@ INodeInformation* IGraphicsScene::getChildrenNode(INodeInformation *root)
 
 INode* IGraphicsScene::getChildrenNode(INode *root)
 {
-    IGraphicsPixmapItem *pixmapItem = new IGraphicsPixmapItem();
+    IGraphicsPixmapItem *pixmapItem = new IGraphicsPixmapItem(this);
     if(root->getParentNode() == NULL)
     {
         pixmapItem->setPixmapPath(":/host.png");
+        pixmapItem->setItemText("root");
         pixmapItem->setPixmapInfo(root->x(), root->y(), 29, 42);
     }
     else
     {
         pixmapItem->setPixmapPath(":/router.png");
+        pixmapItem->setItemText("router");
         pixmapItem->setPixmapInfo(root->x(), root->y(), 46, 42);
 
         IGraphicsLineItem *line = new IGraphicsLineItem();
@@ -155,12 +156,14 @@ INode* IGraphicsScene::getChildrenNode(INode *root)
         }
     }
 }
-
+#if 1
 void IGraphicsScene::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+    qDebug("scene press event");
 //    _start_point = event->scenePos();
 //    qDebug()<<"scene press"<<_start_point;
 //    _item = new IGraphicsRectItem(_start_point.x(), _start_point.y(), 0, 0);
+    QGraphicsScene::mousePressEvent(event);
 }
 
 void IGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
@@ -176,9 +179,11 @@ void IGraphicsScene::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void IGraphicsScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+    qDebug("scene release event");
 //    if(_item != NULL)
 //    {
 //        this->addItem(_item);
 //    }
+    QGraphicsScene::mouseReleaseEvent(event);
 }
-
+#endif

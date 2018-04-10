@@ -43,7 +43,7 @@ float INode::initNodeRotate(const int index)
         count = index / 2 + index % 2;
         degrees = _node_parent->getNodeRotate() - getChildNodeRotate(count);
     }
-    qDebug("parent : %d - %d", _node_parent->getNodeRotate(), getChildNodeRotate(count));
+//    qDebug("parent : %d - %d", _node_parent->getNodeRotate(), getChildNodeRotate(count));
 
     return degrees;
 }
@@ -53,7 +53,7 @@ QPoint INode::getChildNodePoint(const int index)
 //    float degrees = initNodeRotate(index);
     double x = qCos(qDegreesToRadians(_node_rotate)) * _kdefault_radius + _node_parent->x();
     double y = qSin(qDegreesToRadians(_node_rotate)) * _kdefault_radius + _node_parent->y();
-    qDebug()<<index << _node_rotate <<  x << y << _node_x << _node_y;
+//    qDebug()<<index << _node_rotate <<  x << y << _node_x << _node_y;
     return QPoint(x, y);
 }
 
